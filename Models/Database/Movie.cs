@@ -9,8 +9,9 @@ namespace MoviePro.Models.Database
 {
     public class Movie
     {
-        public int Id { get; set; }
+       public int Id { get; set; }
         public int MovieId { get; set; }
+
         public string Title { get; set; }
         public string TagLine { get; set; }
         public string Overview { get; set; }
@@ -19,12 +20,16 @@ namespace MoviePro.Models.Database
         [DataType(DataType.Date)]
         [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
+
         public MovieRating Rating { get; set; }
         public float VoteAverage { get; set; }
+
         public byte[] Poster { get; set; }
-        public byte[] PosterType { get; set; }
+        public string PosterType { get; set; }
+
         public byte[] Backdrop { get; set; }
-        public byte[] BackdropType { get; set; }
+        public string BackdropType { get; set; }
+
         public string TrailerUrl { get; set; }
 
         [NotMapped]

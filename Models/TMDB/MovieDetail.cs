@@ -4,7 +4,7 @@ namespace MoviePro.Models.TMDB
 {
 
 
-    public class MovieDeatils
+    public class MovieDetail
     {
         public bool adult { get; set; }
         public string backdrop_path { get; set; }

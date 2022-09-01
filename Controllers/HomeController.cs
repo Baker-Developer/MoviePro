@@ -1,12 +1,12 @@
-﻿using BlogProject.Models;
+﻿using MoviePro.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MoviePro.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace MoviePro.Controllers
 {
