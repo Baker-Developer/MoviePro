@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MoviePro.Data;
-using MoviePro.Models.Database;
 using MoviePro.Models.Settings;
+using MoviePro.Models.Database;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,9 +16,9 @@ namespace MoviePro.Services
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public SeedService(IOptions<AppSettings> appsettings, ApplicationDbContext dbContext, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public SeedService(IOptions<AppSettings> appSettings, ApplicationDbContext dbContext, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            _appSettings = appsettings.Value;
+            _appSettings = appSettings.Value;
             _dbContext = dbContext;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -47,13 +47,13 @@ namespace MoviePro.Services
 
             await _roleManager.CreateAsync(new IdentityRole(adminRole));
         }
+
         private async Task SeedUsersAsync()
         {
             if (_userManager.Users.Any())
             {
                 return;
             }
-
             var credentials = _appSettings.MovieProSettings.DefaultCredentials;
             var newUser = new IdentityUser()
             {
@@ -65,13 +65,13 @@ namespace MoviePro.Services
             await _userManager.CreateAsync(newUser, credentials.Password);
             await _userManager.AddToRoleAsync(newUser, credentials.Role);
         }
+
         private async Task SeedCollections()
         {
             if (_dbContext.Collection.Any())
             {
                 return;
             }
-
             _dbContext.Add(new Collection()
             {
                 Name = _appSettings.MovieProSettings.DefaultCollection.Name,

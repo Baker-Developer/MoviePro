@@ -1,20 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MoviePro.Data;
 using MoviePro.Models.Settings;
-using MoviePro.Services;
 using MoviePro.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MoviePro.Services;
 
 namespace MoviePro
 {
@@ -33,29 +27,26 @@ namespace MoviePro
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     ConnectionService.GetConnectionString(Configuration)));
-           
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.AddIdentity<IdentityUser, IdentityRole>()
-               .AddEntityFrameworkStores<ApplicationDbContext>();
+     
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
             services.AddControllersWithViews();
 
+
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddHttpClient();
 
             services.AddTransient<SeedService>();
 
-            services.AddHttpClient();
-
-            services.AddScoped<IRemoteMovieServices,TMDBMovieService>();
-
+            services.AddScoped<IRemoteMovieServices, TMDBMovieService>();
             services.AddScoped<IDataMappingService, TMDBMappingService>();
-
             services.AddSingleton<IImageService, BasicImageService>();
         }
 
