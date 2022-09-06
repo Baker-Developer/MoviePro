@@ -88,6 +88,36 @@
     </div>
 }
 
+
+<div class="row">
+    <div class="col">
+        <span class="h5 font-weight-bolder"> CREW:</span>
+    </div>
+</div>
+
+@foreach (var crew in Model.Crew.Take(5)) 
+{
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-2">
+                        <img src="@crew.ImageUrl" class="img-fluid" style="width: 10rem" alt="...">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title"><a asp-action="Details" asp-controller="Actors" asp-route-id="@crew.TMDBcrewId">Name: @crew.Name</a></h5>
+                            <p class="card-text">Department: @crew.Department</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

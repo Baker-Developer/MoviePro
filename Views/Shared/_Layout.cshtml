@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MoviePro</title>
+    <title>@ViewData["Title"] - Movie Pro By Benjamin Baker</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
@@ -18,9 +18,34 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark"  asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                      
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Movies" asp-action="Library">Library</a>
+                        </li>
+
+                        @if (User.IsInRole("Administrator"))
+                        {
+                             
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Admin Pages
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="nav-link text-dark"  asp-controller="Home" asp-action="">Collections</a>
+                                      <a class="nav-link text-dark"  asp-controller="Home" asp-action="">Movie Collections</a>
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Movies
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="nav-link text-dark" asp-controller="Home" asp-action="">Import</a>
+                                        <a class="nav-link text-dark" asp-controller="Home" asp-action="">Create</a>
+                                           <a class="nav-link text-dark" asp-controller="Home" asp-action="">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -35,7 +60,7 @@
 
     <footer class="border-top footer text-muted ">
         <div class="container">
-            &copy; 2022 - MoviePro - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+           <a> &copy; 2022 - MoviePro -</a>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
